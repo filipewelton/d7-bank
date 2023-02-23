@@ -8,8 +8,8 @@ import { identifyStatusCode } from '@shared/helpers/status-code'
 export async function validateApiCredential(req: Request, res: Response, next: NextFunction) {
   try {
     const credential: ApiCredential = {
-      key: req.headers['api-key'].toString(),
-      token: req.headers['api-token'].toString(),
+      key: String(req.headers['api-key']),
+      token: String(req.headers['api-token']),
     }
 
     await validateDto(ApiCredential, credential)
