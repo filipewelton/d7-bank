@@ -2,8 +2,9 @@ import { faker } from '@faker-js/faker'
 import { createHash } from 'crypto'
 import supertest from 'supertest'
 
+import { UserCredential } from '@shared/services/user-credential'
+
 import { CustomerCreation } from '@customer/dto/customer-creation'
-import { UserCredential } from '@interfaces/middlewares/user-credential-validation'
 
 import { HttpServer } from '../helpers/http-server'
 
