@@ -3,12 +3,12 @@ import { Request, Response } from 'express'
 import { CustomerService } from '@customer/services/customer'
 import { AddressService } from '@customer/services/address'
 import { DeviceCreation, DeviceService } from '@customer/services/device'
-import { CustomerCreation } from '@customer/dto/customer-creation'
 import { IdentifierService } from '@customer/services/identifier'
 
-import { CustomError } from '@shared/helpers/custom-error'
 import { validateDto } from '@shared/helpers/dto-validation'
 import { identifyStatusCode } from '@shared/helpers/status-code'
+
+import { CustomerCreation } from './dto'
 
 export async function createCustomer(req: Request, res: Response) {
   try {
@@ -41,10 +41,9 @@ export async function createCustomer(req: Request, res: Response) {
     res.status(201).json({
       message: 'Customer created successfully'
     })
-  } catch ({ name, reason }) {
-    const error = new CustomError(name, 'User creation', reason)
+  } catch (error) {
+    error.context = 'User creation'
     const code = identifyStatusCode(error.name)
-    console.log(error)
     res.status(code).json({ error })
   }
 }
